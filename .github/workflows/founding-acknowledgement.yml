@@ -1,0 +1,47 @@
+# Prototype PR acknowledgement, not a commercial contributor licence.
+# See https://github.com/Community-AI-Lab/.github/blob/main/FOUNDING-CONTRIBUTOR-TERMS.md
+name: Founding contributor acknowledgement
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, closed]
+  issue_comment:
+    types: [created]
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
+  statuses: write
+
+jobs:
+  acknowledgement:
+    if: |
+      github.event_name == 'pull_request_target' ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request &&
+       (github.event.comment.body == 'recheck' ||
+        github.event.comment.body == 'I have read the Community AI Lab founding contributor draft'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request contributor acknowledgement
+        uses: contributor-license/cla-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: cla-signatures
+          path-to-signatures: signatures/v0.1/acknowledgements.json
+          path-to-document: https://github.com/Community-AI-Lab/.github/blob/main/FOUNDING-CONTRIBUTOR-TERMS.md
+          allowlist: 'dependabot[bot],renovate[bot]'
+          custom-pr-sign-comment: 'I have read the Community AI Lab founding contributor draft'
+          custom-notsigned-prcomment: |
+            Thanks for contributing, $you. This is a **test acknowledgement**, not the final legal CLA.
+            Please read the [draft founding contributor terms](https://github.com/Community-AI-Lab/.github/blob/main/FOUNDING-CONTRIBUTOR-TERMS.md).
+            To confirm that you have read the draft, post a separate PR comment with exactly:
+
+            \`I have read the Community AI Lab founding contributor draft\`
+
+            No commercial or royalty rights are granted by this draft. A reviewed agreement will follow.
+          custom-allsigned-prcomment: |
+            ✅ All contributors have acknowledged the founding terms draft.
+            This is a workflow test only; commercial licensing and revenue-sharing agreements are not yet in force.
