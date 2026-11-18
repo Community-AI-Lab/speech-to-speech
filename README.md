@@ -1,33 +1,23 @@
 # Community AI Lab — Speech-to-Speech
 
-This is the first model project for [Community AI Lab](https://github.com/Community-AI-Lab/platform).
+An open-source effort to adapt **Qwen3-Omni** for low-latency, **full-duplex speech-to-speech**: the assistant listens while speaking, handles interruptions, understands group conversations and produces a live transcript of the user's speech.
 
-## Goal
+**[Proposed architecture and diagram](docs/architecture.md)**
 
-Build a voice AI demo that accepts speech and produces spoken replies. We want to study low latency, naturalness and the ability to run locally on suitable hardware, with optional hosted inference.
+## Proposed development work
 
-Nothing is trained or deployed yet. **Start by evaluating existing models** with suitable licences rather than immediately pretraining a new one.
+- [Full-duplex model adaptation](https://github.com/Community-AI-Lab/speech-to-speech/issues/9): causal/streaming audio, natural turn-taking, interruptions, group conversation and live user transcription.
+- [TensorFold audio inference](https://github.com/Community-AI-Lab/speech-to-speech/issues/10): real-time serving and bidirectional audio sessions, with MLX or other runtime options as appropriate.
+- [Training and evaluation harness](https://github.com/Community-AI-Lab/speech-to-speech/issues/11): reproducible data preparation, model training, checkpoints and objective benchmarks.
+- [Distributed training](https://github.com/Community-AI-Lab/speech-to-speech/issues/12): use the same training harness with multi-GPU coordination; investigate **[Hivemind](https://github.com/learning-at-home/hivemind)** as a candidate.
+- [Audio datasets and consent](https://github.com/Community-AI-Lab/speech-to-speech/issues/4): data provenance, permissions and quality.
 
-## Work to do
-
-1. Set measurable targets: streaming latency, quality and hardware.
-2. Evaluate candidate open-weight speech architectures and their licences.
-3. Decide on safe, properly licensed and consented audio data.
-4. Build a reproducible baseline and evaluation suite.
-5. Improve training, fine-tuning, inference speed and model quality.
-6. Store model artefacts on Hugging Face and test a hosted Inference Endpoint. Confirm support for real-time audio, potentially through a custom serving container.
-7. Connect the demo and usage metrics to the contributor platform.
+**Training and inference are separate.** Training and model-specific experiments live in this repository. [Platform ModelOps](https://github.com/Community-AI-Lab/platform/issues/7) governs approval, releases and publication of trained artifacts to the Hugging Face Hub. TensorFold (or another selected runtime) loads published models for real-time inference; Hugging Face Hub publication is not itself an inference API.
 
 ## First milestone
 
-A reproducible local demo: microphone/audio file in, spoken response out, with installation instructions and measured latency. Next, test hosted inference.
+Verify a spoken request → validated tool call → actual tool result → spoken answer, with reproducible evaluation. Extend that baseline to continuous listening, interruptions and group speech.
 
-## How to contribute
+## Contributing
 
-We're looking for people who work with speech AI, machine learning, audio data, model evaluation, GPU training or inference optimisation. Researchers, engineers and people interested in testing are welcome.
-
-Start at the [Community AI Lab GitHub organisation](https://github.com/Community-AI-Lab), then open this project's [Issues](../../issues). Choose a task, comment to say you're interested, and share code or findings for review. You can also propose a missing task.
-
-See [contribution notes](CONTRIBUTING.md). Only share audio, datasets and code that you have permission to use; don't submit confidential material.
-
-The contributor credit and commercial revenue-sharing rules are still being designed. No payout or ownership rights are promised at this stage.
+See the [project issues](https://github.com/Community-AI-Lab/speech-to-speech/issues) and [contribution notes](CONTRIBUTING.md). Submit only code and audio you are authorised to share. Contributor credits and commercial rights are governed separately by the Community AI Lab Platform and approved agreements.
