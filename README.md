@@ -22,8 +22,12 @@ Nothing is trained or deployed yet. **Start by evaluating existing models** with
 
 A reproducible local demo: microphone/audio file in, spoken response out, with installation instructions and measured latency. Next, test hosted inference.
 
-## Contribute
+## How to contribute
 
-Pick an [open issue](../../issues) and describe what you'll deliver. See [CONTRIBUTING.md](CONTRIBUTING.md). Audio contributors must have permission for submitted recordings, and participants must not submit employer-owned confidential material.
+We're looking for people who work with speech AI, machine learning, audio data, model evaluation, GPU training or inference optimisation. Researchers, engineers and people interested in testing are welcome.
+
+Start at the [Community AI Lab GitHub organisation](https://github.com/Community-AI-Lab), then open this project's [Issues](../../issues). Choose a task, comment to say you're interested, and share code or findings for review. You can also propose a missing task.
+
+See [contribution notes](CONTRIBUTING.md). Only share audio, datasets and code that you have permission to use; don't submit confidential material.
 
 The contributor credit and commercial revenue-sharing rules are still being designed. No payout or ownership rights are promised at this stage.
